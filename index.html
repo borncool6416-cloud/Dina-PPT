@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>G West – Event Proposal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #f0f0eb;
+    --dark-green: #1a2e2a;
+    --copper: #c4913a;
+    --text-body: #2d2d2d;
+    --text-light: #555;
+    --white: #ffffff;
+  }
+
+  body {
+    font-family: 'Tajawal', sans-serif;
+    background: #000;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    direction: rtl;
+  }
+
+  /* ── SLIDE CONTAINER ── */
+  .slideshow {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+  }
+
+  .slide.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* ── FULLSCREEN SLIDE (image only) ── */
+  .slide-full {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* ── SPLIT SLIDE (image left + text right) ── */
+  .slide-split {
+    background: var(--bg);
+    display: flex;
+    flex-direction: row-reverse; /* text on right (RTL = visual right) */
+  }
+
+  .slide-split .img-side {
+    width: 47%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+  }
+
+  .slide-split .text-side {
+    width: 53%;
+    height: 100%;
+    padding: 48px 52px 40px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    direction: rtl;
+    text-align: right;
+  }
+
+  /* copper accent bar above title */
+  .copper-bar {
+    width: 36px;
+    height: 3px;
+    background: var(--copper);
+    margin-bottom: 18px;
+    margin-right: 0;
+    margin-left: auto;
+  }
+
+  .slide-title {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 900;
+    font-size: clamp(26px, 3.2vw, 46px);
+    color: var(--dark-green);
+    line-height: 1.25;
+    margin-bottom: 20px;
+  }
+
+  .slide-lead {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    font-size: clamp(13px, 1.4vw, 18px);
+    color: var(--dark-green);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .slide-body {
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 400;
+    font-size: clamp(12px, 1.2vw, 16px);
+    color: var(--text-body);
+    line-height: 1.85;
+    margin-bottom: 14px;
+  }
+
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px 0;
+  }
+
+  .bullet-list li {
+    font-family: 'Tajawal', sans-serif;
+    font-size: clamp(12px, 1.15vw, 15.5px);
+    color: var(--text-body);
+    line-height: 1.8;
+    padding-right: 20px;
+    position: relative;
+    margin-bottom: 4px;
+  }
+
+  .bullet-list li::before {
+    content: '•';
+    color: var(--copper);
+    position: absolute;
+    right: 0;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .divider-line {
+    width: 100%;
+    height: 1px;
+    background: var(--copper);
+    opacity: 0.35;
+    margin: 16px 0;
+  }
+
+  .slide-quote {
+    font-family: 'Tajawal', sans-serif;
+    font-style: italic;
+    font-size: clamp(12px, 1.1vw, 15px);
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-top: 8px;
+  }
+
+  .slide-highlight {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    font-size: clamp(13px, 1.3vw, 17px);
+    color: var(--dark-green);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .copper-text {
+    color: var(--copper);
+  }
+
+  /* section tag */
+  .section-tag {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 10px;
+  }
+
+  /* ── NAVIGATION ── */
+  .nav {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    z-index: 100;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(8px);
+    padding: 10px 20px;
+    border-radius: 40px;
+  }
+
+  .nav button {
+    background: none;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    color: #fff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .nav button:hover {
+    background: var(--copper);
+    border-color: var(--copper);
+  }
+
+  .slide-counter {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    min-width: 60px;
+    text-align: center;
+    direction: ltr;
+  }
+
+  /* progress dots */
+  .dots {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 100;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.35);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .dot.active {
+    background: var(--copper);
+    transform: scale(1.4);
+  }
+
+  /* keyboard hint */
+  .kbd-hint {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Tajawal', sans-serif;
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    z-index: 100;
+    letter-spacing: 1px;
+    direction: ltr;
+  }
+</style>
+</head>
+<body>
+
+<div class="slideshow" id="slideshow">
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 01 – Cover (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full active" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782433310/bf0f8711-5f9c-4335-b16e-e4b90a3440ad.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 02 – 3D Booth Concept (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782433246/c70463aa-c2d9-4e9d-abe8-73d9de64be9f.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 03 – Event Design Proposal Overview + الفكرة العامة -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-split">
+    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421880/03_-_Event_Design_Proposal_Overview_xkumhj.png')"></div>
+    <div class="text-side">
+      <div class="copper-bar"></div>
+      <h1 class="slide-title">الفكرة العامة</h1>
+      <p class="slide-lead">بدلاً من توجيه ميزانية كبيرة في هذه المرحلة لحملات الشوارع التي ستحقق انتشاراً فقط بدون بناء علاقة حقيقية مع العميل.</p>
+      <p class="slide-body">مقترح إطلاق تجربة حصرية تجمع بين العملاء الحاليين وشركات التسويق العقاري والعملاء المحتملين بهدف:</p>
+      <ul class="bullet-list">
+        <li>تعزيز الثقة في المشروع من خلال إظهار التنفيذ الحقيقي على أرض الواقع</li>
+        <li>خلق مجتمع حقيقي تفاعلي حول الشركة والمشروع والمشروعات المستقبلية</li>
+        <li>تحفيز البروكرز على زيادة المبيعات</li>
+        <li>رفع معدلات التحويل</li>
+        <li>إنتاج محتوى قوي للسوشيال ميديا والـ PR</li>
+      </ul>
+      <div class="divider-line"></div>
+      <p class="slide-highlight">الحدث لن يكون مجرد Event تقليدي، بل تجربة تحمل رسالة</p>
+      <p class="copper-text" style="font-family:'Cairo',sans-serif;font-weight:700;font-size:clamp(13px,1.3vw,17px);">"شكراً على ثقتكم في G West من البداية"</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 04 – Transforming Art Into Reality (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421886/04_-_Transforming_Art_Into_Reality_l1wbxe.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 05 – G WEST Branding Vision + فكرة الحدث الرئيسية -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-split">
+    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421956/05_-_G_WEST_Branding_Vision_nbfagv.png')"></div>
+    <div class="text-side">
+      <div class="copper-bar"></div>
+      <h1 class="slide-title">فكرة الحدث الرئيسية</h1>
+      <p class="slide-body">حدث حصري يجمع عملاء G West الحاليين مع كبار البروكرز والشركاء والعملاء المحتملين المختارين وإدارة الشركة داخل أجواء راقية تعكس:</p>
+      <ul class="bullet-list">
+        <li>بداية التنفيذ الفعلية</li>
+        <li>الثقة المتبادلة</li>
+        <li>روح المجتمع G WEST</li>
+        <li>قوة البراند</li>
+      </ul>
+      <div class="divider-line"></div>
+      <p class="slide-body">الأسماء المقترحة للحدث:</p>
+      <ul class="bullet-list">
+        <li>Celebrating Our Early Community</li>
+        <li>Together From The Start – مع بعض من البداية</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 06 – Concept Kickoff (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/06_-_Concept_Kickoff_Hello_to_the_Design_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 07 – Design Philosophy + أجواء الحدث -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-split">
+    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421926/07_-_Design_Philosophy_Statement_f8ymr8.png')"></div>
+    <div class="text-side">
+      <div class="copper-bar"></div>
+      <h1 class="slide-title">أجواء الحدث</h1>
+      <ul class="bullet-list">
+        <li>ديكور راقي وبسيط</li>
+        <li>إضاءة خفيفة</li>
+        <li>جلسات مودرن</li>
+        <li>براندنج أسود، أخضر، نحاسي</li>
+        <li>موسيقى هادئة</li>
+      </ul>
+      <div class="divider-line"></div>
+      <p class="slide-highlight">الهدف هو خلق إحساس: مش مجرد حفل — ده بداية حقيقية لمجتمع جي ويست</p>
+      <p class="slide-quote">"This is not just a launch… this is the beginning of a community."</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 08 – G WEST Identity (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/08_-_G_WEST_Identity_Showcase_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 09 – BTL House (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/09_-_BTL_House_Creative_Stamp_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 10 – Portfolio Protection (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/10_-_Portfolio_Protection_Notice_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 11 – Moodboard + إعداد القاعة -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-split">
+    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/11_-_Conceptual_Moodboard_abju7w.png')"></div>
+    <div class="text-side">
+      <div class="copper-bar"></div>
+      <h1 class="slide-title">إعداد القاعة</h1>
+      <p class="section-tag">Venue Setup</p>
+      <ul class="bullet-list">
+        <li>استقبال وBranding</li>
+        <li>Lounge Seating – أماكن مخصصة لكل مجموعة (إدارة – عملاء – شركات تسويق – صحفيين)</li>
+        <li>Coffee & Beverage Station – بريك كوفي</li>
+        <li>Large LED Screen – مسرح وشاشة كبيرة</li>
+        <li>Soft Lighting – إضاءات بألوان الشركة والمشروع</li>
+        <li>Landscape Styling – ديكور له علاقة بالـ landscape</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 12 – Visual Inspirations + أجندة الحدث -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-split">
+    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/12_-_Visual_Inspirations_abju7w.png')"></div>
+    <div class="text-side">
+      <div class="copper-bar"></div>
+      <h1 class="slide-title">أجندة الحدث</h1>
+      <p class="section-tag">Event Flow & Timeline</p>
+      <p class="slide-lead">استقبال الضيوف</p>
+      <ul class="bullet-list">
+        <li>Welcome Drinks – ضيافة</li>
+        <li>Background Music – موسيقى هادئة</li>
+        <li>Registration & Name Tags – تسجيل الدخول</li>
+        <li>Media Coverage – تصوير على خلفيات براندنج الشركة</li>
+      </ul>
+      <div class="divider-line"></div>
+      <p class="slide-lead">الافتتاح الرسمي</p>
+      <ul class="bullet-list">
+        <li>عرض سينمائي قصير "From Vision to Reality"</li>
+        <li>عرض فيديو المشروع ومراحل التنفيذ</li>
+        <li>كلمة قصيرة من الإدارة (5 دقائق)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 13 – Booth Layout + كلمة مدير المشروع -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-split">
+    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/13_-_Booth_Layout_Draft_abju7w.png')"></div>
+    <div class="text-side">
+      <div class="copper-bar"></div>
+      <h1 class="slide-title">كلمة مدير المشروع</h1>
+      <p class="slide-body">يتضمن حديث مدير المشروع:</p>
+      <ul class="bullet-list">
+        <li>أعمال الحفر والإحلال</li>
+        <li>مراحل التأسيس</li>
+        <li>مراحل التنفيذ</li>
+        <li>المواصفات الفنية</li>
+        <li>مراحل العمل القادمة</li>
+      </ul>
+      <div class="divider-line"></div>
+      <p class="slide-lead">التكريمات</p>
+      <ul class="bullet-list">
+        <li>تكريم أوائل العملاء</li>
+        <li>أبرز البروكرز</li>
+        <li>شركاء النجاح</li>
+        <li>توزيع شهادات تقدير</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 14 – Stage Design (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/14_-_Stage_Design_Elements_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 15 – Lighting Concept (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/15_-_Lighting_Concept_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 16 – Color Palette + الهدايا والجوائز -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-split">
+    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/16_-_Color_Palette_Direction_abju7w.png')"></div>
+    <div class="text-side">
+      <div class="copper-bar"></div>
+      <h1 class="slide-title">مقترح الهدايا والجوائز</h1>
+      <p class="section-tag">Suggested Rewards & Giveaways – عجلة الحظ</p>
+      <p class="slide-lead">جوائز كبرى</p>
+      <ul class="bullet-list">
+        <li>Full Finishing Package – باكدج تشطيبات للمناطق المختارة</li>
+        <li>Kitchen Package – باكدج مطبخ كامل بتجهيزاته</li>
+        <li>Smart Home Package – باكدج سمارت هوم</li>
+        <li>AC Package – باكدج تكييفات</li>
+        <li>Landscape Upgrade – باكدج فرش حديقة للأدوار الأرضية</li>
+      </ul>
+      <div class="divider-line"></div>
+      <p class="slide-highlight">استراتيجية الجوائز الموجلة: تنفيذ عند الاستلام — تكلفة حالية منخفضة، قيمة تسويقية مرتفعة</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 17 – Material & Texture (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/17_-_Material_Texture_Choices_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 18 – Seating + استراتيجية المحتوى -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-split">
+    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/18_-_Seating_Arrangement_Plan_abju7w.png')"></div>
+    <div class="text-side">
+      <div class="copper-bar"></div>
+      <h1 class="slide-title">استراتيجية المحتوى</h1>
+      <p class="section-tag">Media & Content Strategy</p>
+      <p class="slide-body">الحدث سيتم استغلاله لإنتاج كمية كبيرة من المحتوى تشمل:</p>
+      <ul class="bullet-list">
+        <li>Reels – ريلز</li>
+        <li>Drone Footage – تصوير جوي</li>
+        <li>Client Testimonials – تصوير آراء عملاء</li>
+        <li>Interview Clips – انترفيوهات</li>
+        <li>Client Reactions – ردود أفعال عملاء</li>
+        <li>Broker Interviews – انترفيوهات شركات التسويق العقاري</li>
+      </ul>
+      <div class="divider-line"></div>
+      <p class="slide-highlight">محتوى يكفي لمدة شهر كامل على السوشيال ميديا</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 19 – Audience Flow + أساسيات خطة المحتوى -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-split">
+    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/19_-_Audience_Flow_Mapping_abju7w.png')"></div>
+    <div class="text-side">
+      <div class="copper-bar"></div>
+      <h1 class="slide-title">أساسيات خطة المحتوى</h1>
+      <ul class="bullet-list">
+        <li><strong>Wall of Founders</strong> – حيث يقوم العملاء بالتوقيع أو كتابة أسمائهم كجزء من بداية مجتمع G West</li>
+        <li><strong>Client Testimonials</strong> – "Why I chose G West" – شهادات العملاء لماذا اختاروا المشروع</li>
+        <li><strong>Broker Interviews</strong> – "Why G West is different" – مقابلات شركات التسويق العقاري</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 20 – Venue Highlight (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/20_-_Venue_Highlight_G_WEST_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 21 – Venue Layout (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/21_-_Venue_Layout_Overview_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 22 – Venue Atmosphere (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/22_-_Venue_Atmosphere_Concept_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 23 – Venue Branding (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/23_-_Venue_Branding_Integration_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 24 – Venue Technical (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/24_-_Venue_Technical_Setup_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 25 – Venue Accessibility (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/25_-_Venue_Accessibility_Plan_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 26 – Venue Decoration (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/26_-_Venue_Decoration_Details_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 27 – Venue Mood + المردود المتوقع -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-split">
+    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/27_-_Venue_Mood_Ambience_abju7w.png')"></div>
+    <div class="text-side">
+      <div class="copper-bar"></div>
+      <h1 class="slide-title">المردود المتوقع</h1>
+      <p class="section-tag">Expected Outcomes</p>
+      <p class="slide-lead">التأثير على البراند</p>
+      <ul class="bullet-list">
+        <li>تعزيز صورة Engineers Developments كبراند موثوق</li>
+        <li>إبراز التنفيذ الحقيقي على أرض الواقع</li>
+        <li>بناء علاقة عاطفية مع العملاء</li>
+      </ul>
+      <div class="divider-line"></div>
+      <p class="slide-lead">التأثير على المبيعات</p>
+      <ul class="bullet-list">
+        <li>زيادة معدل التحويل</li>
+        <li>تحفيز البروكرز</li>
+        <li>زيادة الـ Leads</li>
+        <li>خلق حالة Buzz حول المشروع</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 28 – Venue Final Render (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/28_-_Venue_Final_Render_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 29 – Entertainment Lineup + Networking -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-split">
+    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/29_-_Entertainment_Lineup_Intro_abju7w.png')"></div>
+    <div class="text-side">
+      <div class="copper-bar"></div>
+      <h1 class="slide-title">الفقرات والنتوركينج</h1>
+      <p class="section-tag">Entertainment & Networking</p>
+      <ul class="bullet-list">
+        <li>فقرة ترفيهية (ساكسفون – كمان)</li>
+        <li>السحب على الجوائز الرئيسية</li>
+      </ul>
+      <div class="divider-line"></div>
+      <p class="slide-lead">Networking بعد الفقرات الرسمية</p>
+      <ul class="bullet-list">
+        <li>العملاء</li>
+        <li>الإدارة</li>
+        <li>البروكرز</li>
+        <li>فريق المبيعات</li>
+      </ul>
+      <div class="divider-line"></div>
+      <p class="slide-body">Live Music / Saxophone / DJ Soft House — تصوير Content & Testimonials</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 30 – Sherine Hamdy (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/30_-_Sherine_Hamdy_Performance_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 31 – Youssef El Tohamy (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/31_-_Youssef_El_Tohamy_Segment_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 32 – Nouran Abou Taleb (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/32_-_Nouran_Abou_Taleb_Showcase_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 33 – Cassette 90s Band (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/33_-_Cassette_90s_Band_Act_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 34 – Wael El Fashny (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/34_-_Wael_El_Fashny_Performance_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 35 – Entertainment Flow (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/35_-_Entertainment_Flow_Plan_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 36 – Stage Program (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/36_-_Stage_Program_Timeline_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 37 – Audience Engagement + التوصية النهائية -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-split">
+    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/37_-_Audience_Engagement_Strategy_abju7w.png')"></div>
+    <div class="text-side">
+      <div class="copper-bar"></div>
+      <h1 class="slide-title">التوصية النهائية</h1>
+      <p class="slide-body">في هذه المرحلة من المشروع، يُفضل الاستثمار في تجربة حقيقية تبني الثقة والانتماء حول G West، بدلاً من التركيز الكامل على الحملات التقليدية.</p>
+      <ul class="bullet-list">
+        <li>تحويل العملاء الحاليين والبروكرز إلى سفراء حقيقيين للبراند</li>
+        <li>خلق حالة قوية من الـ Social Proof والمصداقية</li>
+        <li>الاستفادة من وجود تنفيذ فعلي على أرض الواقع</li>
+      </ul>
+      <div class="divider-line"></div>
+      <p class="slide-highlight copper-text">الهدف مش إقامة Event — لكن خلق تجربة تجعل كل عميل يشعر أنه جزء من بداية مجتمع حقيقي يُبنى بعناية.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 38 – Entertainment Branding (fullscreen – blank) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/38_-_Entertainment_Branding_Integration_abju7w.png');background-color:#111;"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 39 – Entertainment Technical (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/39_-_Entertainment_Technical_Setup_abju7w.png');background-color:#111;"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 40 – Entertainment Final Render (fullscreen – blank) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/40_-_Entertainment_Final_Render_abju7w.png');background-color:#111;"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 41 – Thank You (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/41_-_Thank_You_Message_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 42 – Contact Website (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/42_-_Contact_Information_Website_abju7w.png');background-color:#111;"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 43 – Contact Telephone (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/43_-_Contact_Information_Telephone_abju7w.png')"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 44 – Closing Credits (fullscreen) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/44_-_Closing_Credits_BTL_House_abju7w.png');background-color:#111;"></div>
+
+</div><!-- end slideshow -->
+
+<!-- Navigation -->
+<div class="nav">
+  <button id="prevBtn" onclick="changeSlide(-1)">&#8592;</button>
+  <span class="slide-counter" id="counter">1 / 44</span>
+  <button id="nextBtn" onclick="changeSlide(1)">&#8594;</button>
+</div>
+
+<!-- Progress dots (only first 44, shown as small group) -->
+<div class="dots" id="dots"></div>
+
+<div class="kbd-hint">← → Arrow keys to navigate</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('counter');
+  const dotsContainer = document.getElementById('dots');
+  let current = 0;
+  const total = slides.length;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goTo(i);
+    dotsContainer.appendChild(dot);
+  });
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    dotsContainer.children[current].classList.remove('active');
+    current = (n + total) % total;
+    slides[current].classList.add('active');
+    dotsContainer.children[current].classList.add('active');
+    counter.textContent = (current + 1) + ' / ' + total;
+  }
+
+  function changeSlide(dir) { goTo(current + dir); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changeSlide(-1);
+  });
+</script>
+</body>
+</html>
