@@ -63,24 +63,16 @@
   }
 
   .slide-split .img-side {
-    width: 47%;
+    width: 50%;
     height: 100%;
-    background-size: cover;
-    background-position: center;
+    background-size: contain;
+    background-position: center left;
+    background-repeat: no-repeat;
     flex-shrink: 0;
   }
 
-  /* Adjust image dimensions for slides 3 & 7 */
-  .slide:nth-child(3) .img-side {
-    width: 50%;
-  }
-
-  .slide:nth-child(7) .img-side {
-    width: 52%;
-  }
-
   .slide-split .text-side {
-    width: 53%;
+    width: 50%;
     height: 100%;
     padding: 48px 52px 40px 32px;
     display: flex;
@@ -277,6 +269,60 @@
     letter-spacing: 1px;
     direction: ltr;
   }
+
+  /* ── PRINT TO PDF STYLES ── */
+  @media print {
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+    
+    @page {
+      size: landscape;
+      margin: 0;
+    }
+    
+    body, html {
+      width: 100%;
+      height: auto;
+      overflow: visible !important;
+      background: #000;
+    }
+    
+    .slideshow {
+      width: 100%;
+      height: auto;
+      position: static;
+      display: block;
+    }
+    
+    .slide {
+      position: relative !important;
+      opacity: 1 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      page-break-after: always;
+      page-break-inside: avoid;
+      break-after: page;
+      display: flex !important; /* Retains structure for split slides */
+      pointer-events: none;
+    }
+
+    .slide-full {
+      display: block !important;
+    }
+
+    .slide-split .img-side,
+    .slide-split .text-side {
+      height: 100vh !important;
+    }
+    
+    /* Hide all UI elements during PDF generation */
+    .nav, .dots, .kbd-hint {
+      display: none !important;
+    }
+  }
 </style>
 </head>
 <body>
@@ -374,23 +420,23 @@
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 08 – G WEST Identity (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/08_-_G_WEST_Identity_Showcase_abju7w.png')"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421920/08_-_G_WEST_Identity_Showcase_icim6x.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 09 – BTL House (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/09_-_BTL_House_Creative_Stamp_abju7w.png')"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421926/09_-_BTL_House_Creative_Stamp_suoqbm.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 10 – Portfolio Protection (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/10_-_Portfolio_Protection_Notice_abju7w.png')"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421925/10_-_Portfolio_Protection_Notice_textjg.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 11 – Moodboard + إعداد القاعة -->
   <!-- ═══════════════════════════════════════════════ -->
   <div class="slide slide-split">
-    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/11_-_Conceptual_Moodboard_abju7w.png')"></div>
+    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421959/11_-_Conceptual_Moodboard_ooopkc.png')"></div>
     <div class="text-side">
       <div class="copper-bar"></div>
       <h1 class="slide-title">إعداد القاعة</h1>
@@ -410,7 +456,7 @@
   <!-- SLIDE 12 – Visual Inspirations + أجندة الحدث -->
   <!-- ═══════════════════════════════════════════════ -->
   <div class="slide slide-split">
-    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/12_-_Visual_Inspirations_abju7w.png')"></div>
+    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421976/12_-_Visual_Inspirations_a7gkzu.png')"></div>
     <div class="text-side">
       <div class="copper-bar"></div>
       <h1 class="slide-title">أجندة الحدث</h1>
@@ -436,7 +482,7 @@
   <!-- SLIDE 13 – Booth Layout + كلمة مدير المشروع -->
   <!-- ═══════════════════════════════════════════════ -->
   <div class="slide slide-split">
-    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/13_-_Booth_Layout_Draft_abju7w.png')"></div>
+    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421957/13_-_Booth_Layout_Draft_irvi6q.png')"></div>
     <div class="text-side">
       <div class="copper-bar"></div>
       <h1 class="slide-title">كلمة مدير المشروع</h1>
@@ -462,12 +508,12 @@
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 14 – Stage Design (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/14_-_Stage_Design_Elements_abju7w.png')"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782456411/9a2ed7ce-7b3f-49ba-a23e-e3a212a38a61.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 15 – Lighting Concept (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/15_-_Lighting_Concept_abju7w.png')"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782422006/15_-_Lighting_Concept_kejezd.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 16 – Color Palette + الهدايا والجوائز -->
@@ -494,13 +540,13 @@
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 17 – Material & Texture (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/17_-_Material_Texture_Choices_abju7w.png')"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782422000/17_-_Material_Texture_Choices_uzpopy.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 18 – Seating + استراتيجية المحتوى -->
   <!-- ═══════════════════════════════════════════════ -->
   <div class="slide slide-split">
-    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/18_-_Seating_Arrangement_Plan_abju7w.png')"></div>
+    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782422003/18_-_Seating_Arrangement_Plan_hmj2sy.png')"></div>
     <div class="text-side">
       <div class="copper-bar"></div>
       <h1 class="slide-title">استراتيجية المحتوى</h1>
@@ -523,7 +569,7 @@
   <!-- SLIDE 19 – Audience Flow + أساسيات خطة المحتوى -->
   <!-- ═══════════════════════════════════════════════ -->
   <div class="slide slide-split">
-    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/19_-_Audience_Flow_Mapping_abju7w.png')"></div>
+    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782422006/19_-_Audience_Flow_Mapping_mq4prz.png')"></div>
     <div class="text-side">
       <div class="copper-bar"></div>
       <h1 class="slide-title">أساسيات خطة المحتوى</h1>
@@ -538,43 +584,43 @@
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 20 – Venue Highlight (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/20_-_Venue_Highlight_G_WEST_abju7w.png')"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782422047/20_-_Venue_Highlight_G_WEST_h410xq.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 21 – Venue Layout (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/21_-_Venue_Layout_Overview_abju7w.png')"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432876/21_-_Venue_Layout_Overview_jxmsn2.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 22 – Venue Atmosphere (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/22_-_Venue_Atmosphere_Concept_abju7w.png')"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432868/22_-_Venue_Atmosphere_Concept_x0l5au.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 23 – Venue Branding (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/23_-_Venue_Branding_Integration_abju7w.png')"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432876/23_-_Venue_Branding_Integration_jflzko.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 24 – Venue Technical (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/24_-_Venue_Technical_Setup_abju7w.png')"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432881/24_-_Venue_Technical_Setup_hbbmgv.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 25 – Venue Accessibility (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/25_-_Venue_Accessibility_Plan_abju7w.png')"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432892/25_-_Venue_Accessibility_Plan_qijyhj.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 26 – Venue Decoration (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/26_-_Venue_Decoration_Details_abju7w.png')"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432758/26_-_Venue_Decoration_Details_ps2vas.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 27 – Venue Mood + المردود المتوقع -->
   <!-- ═══════════════════════════════════════════════ -->
   <div class="slide slide-split">
-    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/27_-_Venue_Mood_Ambience_abju7w.png')"></div>
+    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432759/27_-_Venue_Mood_Ambience_kzd5fl.png')"></div>
     <div class="text-side">
       <div class="copper-bar"></div>
       <h1 class="slide-title">المردود المتوقع</h1>
@@ -599,13 +645,13 @@
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 28 – Venue Final Render (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/28_-_Venue_Final_Render_abju7w.png')"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432780/28_-_Venue_Final_Render_lsnyrp.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 29 – Entertainment Lineup + Networking -->
   <!-- ═══════════════════════════════════════════════ -->
   <div class="slide slide-split">
-    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/29_-_Entertainment_Lineup_Intro_abju7w.png')"></div>
+    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432785/29_-_Entertainment_Lineup_Intro_ntkidy.png')"></div>
     <div class="text-side">
       <div class="copper-bar"></div>
       <h1 class="slide-title">الفقرات والنتوركينج</h1>
@@ -630,43 +676,43 @@
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 30 – Sherine Hamdy (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/30_-_Sherine_Hamdy_Performance_abju7w.png')"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432812/30_-_Sherine_Hamdy_Performance_xxagax.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 31 – Youssef El Tohamy (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/31_-_Youssef_El_Tohamy_Segment_abju7w.png')"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432767/31_-_Youssef_El_Tohamy_Segment_rph6wo.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 32 – Nouran Abou Taleb (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/32_-_Nouran_Abou_Taleb_Showcase_abju7w.png')"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432780/32_-_Nouran_Abou_Taleb_Showcase_wtagsa.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 33 – Cassette 90s Band (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/33_-_Cassette_90s_Band_Act_abju7w.png')"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432829/33_-_Cassette_90s_Band_Act_adt4o6.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 34 – Wael El Fashny (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/34_-_Wael_El_Fashny_Performance_abju7w.png')"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432831/34_-_Wael_El_Fashny_Performance_znq8en.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 35 – Entertainment Flow (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/35_-_Entertainment_Flow_Plan_abju7w.png')"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432889/35_-_Entertainment_Flow_Plan_r80hvg.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 36 – Stage Program (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/36_-_Stage_Program_Timeline_abju7w.png')"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432829/36_-_Stage_Program_Timeline_oh8jha.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 37 – Audience Engagement + التوصية النهائية -->
   <!-- ═══════════════════════════════════════════════ -->
   <div class="slide slide-split">
-    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/37_-_Audience_Engagement_Strategy_abju7w.png')"></div>
+    <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432845/37_-_Audience_Engagement_Strategy_e4r5ys.png')"></div>
     <div class="text-side">
       <div class="copper-bar"></div>
       <h1 class="slide-title">التوصية النهائية</h1>
@@ -684,17 +730,17 @@
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 38 – Entertainment Branding (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/38_-_Entertainment_Branding_Integration_abju7w.png');background-color:#111;"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432790/38_-_Entertainment_Branding_Integration_tmpw8u.png');background-color:#111;"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 39 – Entertainment Technical (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/39_-_Entertainment_Technical_Setup_abju7w.png');background-color:#111;"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432814/39_-_Entertainment_Technical_Setup_owtwx6.png');background-color:#111;"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 40 – Entertainment Final Render (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/40_-_Entertainment_Final_Render_abju7w.png');background-color:#111;"></div>
+  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432815/40_-_Entertainment_Final_Render_enzksy.png');background-color:#111;"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 41 – Thank You (fullscreen) -->
@@ -723,6 +769,11 @@
   <button id="prevBtn" onclick="changeSlide(-1)">&#8592;</button>
   <span class="slide-counter" id="counter">1 / 44</span>
   <button id="nextBtn" onclick="changeSlide(1)">&#8594;</button>
+  <div style="width: 1px; height: 20px; background: rgba(255,255,255,0.3); margin: 0 4px;"></div>
+  <!-- Download PDF Button -->
+  <button id="downloadPdfBtn" onclick="window.print()" title="تحميل (Save as PDF)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+  </button>
 </div>
 
 <!-- Progress dots (only first 44, shown as small group) -->
@@ -731,6 +782,7 @@
 <div class="kbd-hint">← → Arrow keys to navigate</div>
 
 <script>
+  // ── SLIDESHOW LOGIC ──
   const slides = document.querySelectorAll('.slide');
   const counter = document.getElementById('counter');
   const dotsContainer = document.getElementById('dots');
