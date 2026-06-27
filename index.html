@@ -39,8 +39,9 @@
     width: 100%;
     height: 100%;
     opacity: 0;
-    transition: opacity 0.6s ease;
+    transition: opacity 0.5s ease;
     pointer-events: none;
+    will-change: opacity;
   }
 
   .slide.active {
@@ -53,6 +54,13 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-color: #111;
+    animation: fadeInImage 0.8s ease-out;
+  }
+
+  @keyframes fadeInImage {
+    from { opacity: 0.9; }
+    to { opacity: 1; }
   }
 
   /* ── SPLIT SLIDE (image left + text right) ── */
@@ -60,6 +68,12 @@
     background: var(--bg);
     display: flex;
     flex-direction: row-reverse; /* text on right (RTL = visual right) */
+    animation: slideIn 0.7s ease-out;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   .slide-split .img-side {
@@ -69,6 +83,7 @@
     background-position: center left;
     background-repeat: no-repeat;
     flex-shrink: 0;
+    background-color: rgba(26, 46, 42, 0.05);
   }
 
   .slide-split .text-side {
@@ -78,7 +93,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    overflow: hidden;
+    overflow: auto;
     direction: rtl;
     text-align: right;
   }
@@ -96,10 +111,11 @@
   .slide-title {
     font-family: 'Cairo', sans-serif;
     font-weight: 900;
-    font-size: clamp(26px, 3.2vw, 46px);
+    font-size: clamp(26px, 3.2vw, 48px);
     color: var(--dark-green);
-    line-height: 1.25;
-    margin-bottom: 20px;
+    line-height: 1.3;
+    margin-bottom: 24px;
+    letter-spacing: -0.5px;
   }
 
   .slide-lead {
@@ -114,10 +130,11 @@
   .slide-body {
     font-family: 'Tajawal', sans-serif;
     font-weight: 400;
-    font-size: clamp(12px, 1.2vw, 16px);
+    font-size: clamp(13px, 1.2vw, 17px);
     color: var(--text-body);
-    line-height: 1.85;
-    margin-bottom: 14px;
+    line-height: 1.9;
+    margin-bottom: 18px;
+    letter-spacing: 0.3px;
   }
 
   .bullet-list {
@@ -188,46 +205,52 @@
   /* ── NAVIGATION ── */
   .nav {
     position: fixed;
-    bottom: 24px;
+    bottom: 28px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 18px;
     z-index: 100;
-    background: rgba(0,0,0,0.55);
-    backdrop-filter: blur(8px);
-    padding: 10px 20px;
-    border-radius: 40px;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(12px);
+    padding: 12px 24px;
+    border-radius: 50px;
+    border: 1px solid rgba(196, 145, 58, 0.15);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
   }
 
   .nav button {
-    background: none;
-    border: 1.5px solid rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.4);
     color: #fff;
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
   }
 
   .nav button:hover {
     background: var(--copper);
     border-color: var(--copper);
+    transform: scale(1.1);
+    box-shadow: 0 4px 16px rgba(196, 145, 58, 0.3);
   }
 
   .slide-counter {
     font-family: 'Tajawal', sans-serif;
-    font-size: 13px;
-    color: rgba(255,255,255,0.8);
-    min-width: 60px;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.9);
+    min-width: 70px;
     text-align: center;
     direction: ltr;
+    letter-spacing: 0.5px;
   }
 
   /* progress dots */
@@ -238,22 +261,32 @@
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
     z-index: 100;
+    padding: 12px 6px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
   }
 
   .dot {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.4);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .dot:hover {
+    background: rgba(196, 145, 58, 0.6);
   }
 
   .dot.active {
     background: var(--copper);
-    transform: scale(1.4);
+    transform: scale(1.5);
+    box-shadow: 0 0 12px rgba(196, 145, 58, 0.4);
   }
 
   /* keyboard hint */
@@ -268,6 +301,122 @@
     z-index: 100;
     letter-spacing: 1px;
     direction: ltr;
+  }
+
+  /* loading indicator */
+  .loading-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--copper), rgba(196, 145, 58, 0.5));
+    width: 30%;
+    z-index: 200;
+    animation: loading 1.5s ease-in-out infinite;
+  }
+
+  @keyframes loading {
+    0% { width: 10%; }
+    50% { width: 70%; }
+    100% { width: 90%; }
+  }
+
+  .loading-bar.hidden {
+    display: none;
+  }
+
+  /* ── RESPONSIVE MOBILE STYLES ── */
+  @media (max-width: 768px) {
+    .slide-split {
+      flex-direction: column;
+    }
+
+    .slide-split .img-side {
+      width: 100%;
+      height: 40%;
+      background-position: center;
+    }
+
+    .slide-split .text-side {
+      width: 100%;
+      height: 60%;
+      padding: 32px 24px 24px 24px;
+    }
+
+    .nav {
+      bottom: 16px;
+      gap: 12px;
+      padding: 8px 16px;
+    }
+
+    .nav button {
+      width: 36px;
+      height: 36px;
+      font-size: 14px;
+    }
+
+    .slide-counter {
+      min-width: 50px;
+      font-size: 12px;
+    }
+
+    .dots {
+      right: 12px;
+      gap: 4px;
+      padding: 8px 4px;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+    }
+
+    .kbd-hint {
+      font-size: 9px;
+      top: 12px;
+    }
+
+    .slide-title {
+      font-size: clamp(20px, 2.8vw, 32px);
+      margin-bottom: 16px;
+    }
+
+    .slide-body {
+      font-size: clamp(12px, 1vw, 14px);
+      margin-bottom: 12px;
+    }
+
+    .bullet-list li {
+      font-size: clamp(11px, 0.95vw, 13px);
+      padding-right: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .slide-split .img-side {
+      height: 35%;
+    }
+
+    .slide-split .text-side {
+      height: 65%;
+      padding: 24px 16px 20px 16px;
+    }
+
+    .nav {
+      gap: 10px;
+      padding: 6px 12px;
+    }
+
+    .nav button {
+      width: 32px;
+      height: 32px;
+      font-size: 12px;
+    }
+
+    .slide-counter {
+      min-width: 45px;
+      font-size: 11px;
+    }
   }
 
   /* ── PRINT TO PDF STYLES ── */
@@ -327,6 +476,9 @@
 </head>
 <body>
 
+<!-- Loading Indicator -->
+<div class="loading-bar hidden" id="loadingBar"></div>
+
 <div class="slideshow" id="slideshow">
 
   <!-- ═══════════════════════════════════════════════ -->
@@ -334,7 +486,7 @@
   <!-- ═══════════════════════════════════════════════ -->
   <div class="slide slide-full active" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782433310/bf0f8711-5f9c-4335-b16e-e4b90a3440ad.png')"></div>
 
-  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ════════════════��══════════════════════════════ -->
   <!-- SLIDE 02 – 3D Booth Concept (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
   <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782433246/c70463aa-c2d9-4e9d-abe8-73d9de64be9f.png')"></div>
@@ -737,7 +889,7 @@
   <!-- ═══════════════════════════════════════════════ -->
   <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432814/39_-_Entertainment_Technical_Setup_owtwx6.png');background-color:#111;"></div>
 
-  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════��═══════════════ -->
   <!-- SLIDE 40 – Entertainment Final Render (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
   <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432815/40_-_Entertainment_Final_Render_enzksy.png');background-color:#111;"></div>
@@ -782,8 +934,35 @@
 <div class="kbd-hint">← → Arrow keys to navigate</div>
 
 <script>
-  // ── SLIDESHOW LOGIC ──
+  // ── IMAGE PRELOADING FOR FAST LOADING ──
+  function preloadImage(url) {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.src = url;
+  }
+
+  // Extract all image URLs and preload them
   const slides = document.querySelectorAll('.slide');
+  const imageUrls = [];
+  slides.forEach((slide) => {
+    const style = slide.getAttribute('style');
+    if (style && style.includes('background-image')) {
+      const match = style.match(/url\('([^']+)'\)/);
+      if (match) imageUrls.push(match[1]);
+    }
+  });
+
+  // Preload first 3 slides immediately, then others on idle
+  if (imageUrls.length > 0) {
+    imageUrls.slice(0, 3).forEach(preloadImage);
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => {
+        imageUrls.slice(3).forEach(preloadImage);
+      }, { timeout: 2000 });
+    }
+  }
+
+  // ── SLIDESHOW LOGIC ──
   const counter = document.getElementById('counter');
   const dotsContainer = document.getElementById('dots');
   let current = 0;
@@ -804,9 +983,25 @@
     slides[current].classList.add('active');
     dotsContainer.children[current].classList.add('active');
     counter.textContent = (current + 1) + ' / ' + total;
+    
+    // Preload next slide image if it exists
+    const nextSlide = slides[(current + 1) % total];
+    const nextStyle = nextSlide.getAttribute('style');
+    if (nextStyle && nextStyle.includes('background-image')) {
+      const match = nextStyle.match(/url\('([^']+)'\)/);
+      if (match) preloadImage(match[1]);
+    }
   }
 
   function changeSlide(dir) { goTo(current + dir); }
+
+  // Show loading bar on page load and hide after images are loaded
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const loadingBar = document.getElementById('loadingBar');
+      if (loadingBar) loadingBar.classList.add('hidden');
+    }, 800);
+  });
 
   document.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
