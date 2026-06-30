@@ -559,14 +559,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 40px;
+    padding: 20px;
   }
 
   .slide-video video {
-    max-width: 90%;
-    max-height: 85vh;
-    border-radius: 8px;
-    box-shadow: 0 20px 60px rgba(196, 145, 58, 0.2);
+    max-width: 95%;
+    max-height: 92vh;
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
   }
 
   .slide-presenters {
@@ -682,15 +684,16 @@
     width: 200%;
     height: 200%;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 500;
     color: rgba(255, 255, 255, 0.05);
-    line-height: 60px;
-    letter-spacing: 2px;
-    transform: rotate(-35deg);
+    line-height: 50px;
+    letter-spacing: 1px;
+    transform: rotate(-40deg);
     white-space: pre-wrap;
     word-break: break-word;
     user-select: none;
+    text-align: center;
   }
 
   /* 3D Parallax Effect for Multi-Image Slides */
@@ -780,14 +783,14 @@ For Interview Purposes Only</div>
 <div class="slideshow" id="slideshow">
 
   <!-- ═══════════════════════════════════════════════ -->
-  <!-- SLIDE 01 – Cover (fullscreen) -->
+  <!-- SLIDE 01 – Event Intro Video -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full active" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782433310/bf0f8711-5f9c-4335-b16e-e4b90a3440ad.png')"></div>
-
-  <!-- ════════════════��══════════════════════════════ -->
-  <!-- SLIDE 02 – 3D Booth Concept (fullscreen) -->
-  <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782433246/c70463aa-c2d9-4e9d-abe8-73d9de64be9f.png')"></div>
+  <div class="slide slide-video active">
+    <video controls autoplay muted playsinline style="max-width:90vw; max-height:90vh; width:100%; height:auto;">
+      <source src="https://ik.imagekit.io/weo7pcw8v/D2.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 03 – Event Design Proposal Overview + الفكرة العامة -->
@@ -876,11 +879,6 @@ For Interview Purposes Only</div>
   <!-- SLIDE 09 – BTL House (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
   <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421926/09_-_BTL_House_Creative_Stamp_suoqbm.png')"></div>
-
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- SLIDE 10 – Portfolio Protection (fullscreen) -->
-  <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421925/10_-_Portfolio_Protection_Notice_textjg.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 11 – Moodboard + إعداد القاعة -->
@@ -989,7 +987,7 @@ For Interview Purposes Only</div>
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 17 – Material & Texture (fullscreen) -->
-  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ═══��═══════════════════════════════════════════ -->
   <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782422000/17_-_Material_Texture_Choices_uzpopy.png')"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
@@ -1173,7 +1171,7 @@ For Interview Purposes Only</div>
         <li>الاستفادة من وجود تنفيذ فعلي على أرض الواقع</li>
       </ul>
       <div class="divider-line"></div>
-      <p class="slide-highlight copper-text">الهدف مش إقامة Event — لكن خلق تجربة تجعل كل عميل يشعر أنه جزء من بداية مجتمع حقيقي يُبنى اليوم</p>
+      <p class="slide-highlight copper-text">الهدف مش إقامة Event — لكن خلق تجربة تجعل كل عميل يشعر أنه جزء من بداية مجتم�� حقيقي يُبنى اليوم</p>
     </div>
   </div>
 
@@ -1193,49 +1191,46 @@ For Interview Purposes Only</div>
   <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432815/40_-_Entertainment_Final_Render_enzksy.png');background-color:#111;"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
-  <!-- SLIDE 41 – Thank You (fullscreen) -->
+  <!-- SLIDE 41 – Event MCs (مقدمو الحفل) -->
   <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/41_-_Thank_You_Message_abju7w.png')"></div>
+  <div class="slide slide-presenters">
+    <div class="presenter">
+      <img src="https://ik.imagekit.io/weo7pcw8v/Alaa%20Al%20Safy2.jpeg" alt="Alaa Al Safy" class="presenter-photo">
+      <div class="presenter-name">علاء الصافي</div>
+      <div class="presenter-title">مقدم الحفل</div>
+    </div>
+    <div class="presenter">
+      <img src="https://ik.imagekit.io/weo7pcw8v/Marwa%20Abd%20EL%20Meniem.jpeg" alt="Marwa Abd EL Miem" class="presenter-photo">
+      <div class="presenter-name">مروة عبد المنعم</div>
+      <div class="presenter-title">مقدمة الحفل</div>
+    </div>
+  </div>
 
   <!-- ═══════════════════════════════════════════════ -->
-  <!-- SLIDE 42 – New Image (fullscreen) -->
+  <!-- SLIDE 42 – Event Singer (مطربة الحفل) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-singer">
+    <div class="singer-container">
+      <img src="https://ik.imagekit.io/weo7pcw8v/Reham%20Abd%20El%20Hakem2.jpeg" alt="Riham Abd El Hakem" class="singer-photo">
+      <img src="https://ik.imagekit.io/weo7pcw8v/Reham%20Abd%20El%20Hakem1.jpeg" alt="Riham Abd El Hakem" class="singer-photo">
+    </div>
+    <div class="singer-info">
+      <div class="singer-name">ريهام عبد الحكيم</div>
+      <div class="singer-title">مطربة الحفل</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 43 – Entertainment Branding (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
   <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782555177/1_wylybc.png');background-color:#111;"></div>
 
   <!-- ═══════════════════════════════════════════════ -->
-  <!-- SLIDE 43 – Contact Website (fullscreen) -->
+  <!-- SLIDE 44 – Contact Website (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
   <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/42_-_Contact_Information_Website_abju7w.png');background-color:#111;"></div>
 
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- SLIDE 44 – Contact Telephone (fullscreen) -->
-  <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/43_-_Contact_Information_Telephone_abju7w.png')"></div>
 
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- SLIDE 45 – Closing Credits (fullscreen) -->
-  <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/44_-_Closing_Credits_BTL_House_abju7w.png');background-color:#111;"></div>
-
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- SLIDE 46 – Event Intro Video -->
-  <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-video">
-    <video controls autoplay muted>
-      <source src="https://ik.imagekit.io/dj7mwxqjo/Dina-PPT/event-intro.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- SLIDE 47 – Event Presenters (مقدمو الحفل) -->
-  <!-- ═══════════════════════════════════════════════ -->
-  <div class="slide slide-presenters">
-    <div class="presenter">
-      <img src="https://ik.imagekit.io/dj7mwxqjo/Dina-PPT/alaa-alsafy.jpg" alt="Alaa Al Safy" class="presenter-photo">
-      <div class="presenter-name">علاء الصافي</div>
-      <div class="presenter-title">مقدم الحفل</div>
-    </div>
     <div class="presenter">
       <img src="https://ik.imagekit.io/dj7mwxqjo/Dina-PPT/marwa-abd-el-meniem.jpg" alt="Marwa Abd EL Meniem" class="presenter-photo">
       <div class="presenter-name">مروة عبد المنعم</div>
@@ -1262,7 +1257,7 @@ For Interview Purposes Only</div>
 <!-- Navigation -->
 <div class="nav">
   <button id="prevBtn" onclick="changeSlide(-1)">&#8592;</button>
-    <span class="slide-counter" id="counter">1 / 48</span>
+    <span class="slide-counter" id="counter">1 / 44</span>
   <button id="nextBtn" onclick="changeSlide(1)">&#8594;</button>
   <div style="width: 1px; height: 20px; background: rgba(255,255,255,0.3); margin: 0 4px;"></div>
   <!-- Download PDF Button -->
@@ -1277,6 +1272,12 @@ For Interview Purposes Only</div>
 <div class="kbd-hint">← → Arrow keys to navigate</div>
 
 <script>
+  // ── DISABLE RIGHT-CLICK CONTEXT MENU ──
+  document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    return false;
+  });
+
   // ── IMAGE PRELOADING FOR FAST LOADING ──
   function preloadImage(url) {
     const img = new Image();
