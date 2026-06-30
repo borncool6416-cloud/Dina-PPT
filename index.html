@@ -472,9 +472,307 @@
       display: none !important;
     }
   }
+
+  /* ══════════════════════════════════════════════════════════ */
+  /* ADVANCED MOTION & VISUAL EFFECTS */
+  /* ══════════════════════════════════════════════════════════ */
+
+  /* 3D Flip Text Animation */
+  @keyframes flip3d {
+    0% {
+      transform: rotateY(0deg) rotateX(0deg);
+      opacity: 1;
+    }
+    50% {
+      transform: rotateY(90deg) rotateX(20deg);
+      opacity: 0.7;
+    }
+    100% {
+      transform: rotateY(0deg) rotateX(0deg);
+      opacity: 1;
+    }
+  }
+
+  /* Aurora Background Animation */
+  @keyframes auroraGlow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Shine Sweep Effect */
+  @keyframes shineSweep {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+
+  /* Floating Particles */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) translateX(0px);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translateY(-20px) translateX(10px);
+      opacity: 0.6;
+    }
+  }
+
+  /* Parallax Tilt */
+  @keyframes parallaxFloat {
+    0%, 100% {
+      transform: rotateX(0deg) rotateY(0deg) translateZ(0px);
+    }
+  }
+
+  /* Enhanced Slide Transition */
+  @keyframes enhancedSlideIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95) rotateX(10deg);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) rotateX(0deg);
+    }
+  }
+
+  /* Apply enhanced transitions to slides */
+  .slide.active {
+    animation: enhancedSlideIn 0.6s ease-out forwards;
+    perspective: 1200px;
+  }
+
+  /* New Slide Types */
+  .slide-video {
+    background: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+
+  .slide-video video {
+    max-width: 90%;
+    max-height: 85vh;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(196, 145, 58, 0.2);
+  }
+
+  .slide-presenters {
+    background: var(--bg);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 60px 40px;
+    gap: 40px;
+  }
+
+  .presenter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    direction: rtl;
+  }
+
+  .presenter-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 3px solid var(--copper);
+    box-shadow: 0 10px 30px rgba(196, 145, 58, 0.2);
+  }
+
+  .presenter-name {
+    font-family: 'Cairo', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--dark-green);
+    margin-bottom: 8px;
+  }
+
+  .presenter-title {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 14px;
+    color: var(--text-body);
+    font-weight: 400;
+  }
+
+  .slide-singer {
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+    direction: rtl;
+  }
+
+  .singer-container {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+  }
+
+  .singer-photo {
+    width: 280px;
+    height: 350px;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    border: 2px solid var(--copper);
+  }
+
+  .singer-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .singer-name {
+    font-family: 'Cairo', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--dark-green);
+    margin-bottom: 12px;
+  }
+
+  .singer-title {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 16px;
+    color: var(--copper);
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+
+  /* Watermark Overlay */
+  .watermark {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    overflow: hidden;
+  }
+
+  .watermark-text {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.05);
+    line-height: 60px;
+    letter-spacing: 2px;
+    transform: rotate(-35deg);
+    white-space: pre-wrap;
+    word-break: break-word;
+    user-select: none;
+  }
+
+  /* 3D Parallax Effect for Multi-Image Slides */
+  .slide-split .img-side {
+    transition: transform 0.3s ease-out;
+  }
+
+  .slide-split.parallax-active .img-side {
+    transform-style: preserve-3d;
+  }
+
+  /* Floating Particle Background */
+  .particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .particle-dot {
+    width: 4px;
+    height: 4px;
+    background: rgba(196, 145, 58, 0.4);
+    border-radius: 50%;
+    animation: float var(--duration) ease-in-out infinite;
+    animation-delay: var(--delay);
+  }
+
+  /* Mobile responsiveness for new slides */
+  @media (max-width: 768px) {
+    .slide-presenters {
+      flex-direction: column;
+      padding: 40px 24px;
+      gap: 30px;
+    }
+
+    .presenter-photo {
+      width: 150px;
+      height: 150px;
+    }
+
+    .presenter-name {
+      font-size: 18px;
+    }
+
+    .slide-singer {
+      padding: 40px 24px;
+    }
+
+    .singer-container {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .singer-photo {
+      width: 220px;
+      height: 280px;
+    }
+
+    .singer-name {
+      font-size: 24px;
+    }
+
+    .watermark-text {
+      font-size: 14px;
+      line-height: 40px;
+    }
+  }
 </style>
 </head>
 <body>
+
+<!-- Watermark Overlay -->
+<div class="watermark" id="watermark">
+  <div class="watermark-text">Prepared by Dina Al Ashry — Confidential
+For Interview Purposes Only
+Prepared by Dina Al Ashry — Confidential
+For Interview Purposes Only
+Prepared by Dina Al Ashry — Confidential
+For Interview Purposes Only
+Prepared by Dina Al Ashry — Confidential
+For Interview Purposes Only</div>
+</div>
 
 <!-- Loading Indicator -->
 <div class="loading-bar hidden" id="loadingBar"></div>
@@ -550,7 +848,7 @@
 
   <!-- ═══════════════════════════════════════════════ -->
   <!-- SLIDE 07 – Design Philosophy + أجواء الحدث -->
-  <!-- ═════════════════════════════════���═════════════ -->
+  <!-- ════════════════════════════════�����═════════════ -->
   <div class="slide slide-split">
     <div class="img-side" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421926/07_-_Design_Philosophy_Statement_f8ymr8.png')"></div>
     <div class="text-side">
@@ -763,7 +1061,7 @@
   <!-- ═══════════════════════════════════════════════ -->
   <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432892/25_-_Venue_Accessibility_Plan_qijyhj.png')"></div>
 
-  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ═════════���═════════════════════════════════════ -->
   <!-- SLIDE 26 – Venue Decoration (fullscreen) -->
   <!-- ═══════════════════════════════════════════════ -->
   <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782432758/26_-_Venue_Decoration_Details_ps2vas.png')"></div>
@@ -919,12 +1217,52 @@
   <!-- ═══════════════════════════════════════════════ -->
   <div class="slide slide-full" style="background-image:url('https://res.cloudinary.com/dj7mwxqjo/image/upload/v1782421887/44_-_Closing_Credits_BTL_House_abju7w.png');background-color:#111;"></div>
 
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 46 – Event Intro Video -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-video">
+    <video controls autoplay muted>
+      <source src="https://ik.imagekit.io/dj7mwxqjo/Dina-PPT/event-intro.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 47 – Event Presenters (مقدمو الحفل) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-presenters">
+    <div class="presenter">
+      <img src="https://ik.imagekit.io/dj7mwxqjo/Dina-PPT/alaa-alsafy.jpg" alt="Alaa Al Safy" class="presenter-photo">
+      <div class="presenter-name">علاء الصافي</div>
+      <div class="presenter-title">مقدم الحفل</div>
+    </div>
+    <div class="presenter">
+      <img src="https://ik.imagekit.io/dj7mwxqjo/Dina-PPT/marwa-abd-el-meniem.jpg" alt="Marwa Abd EL Meniem" class="presenter-photo">
+      <div class="presenter-name">مروة عبد المنعم</div>
+      <div class="presenter-title">مقدمة الحفل</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SLIDE 48 – Event Singer (مطربة الحفل) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="slide slide-singer">
+    <div class="singer-container">
+      <img src="https://ik.imagekit.io/dj7mwxqjo/Dina-PPT/riham-1.jpg" alt="Riham Abd El Hakem" class="singer-photo">
+      <img src="https://ik.imagekit.io/dj7mwxqjo/Dina-PPT/riham-2.jpg" alt="Riham Abd El Hakem" class="singer-photo">
+    </div>
+    <div class="singer-info">
+      <div class="singer-name">ريهام عبد الحكيم</div>
+      <div class="singer-title">مطربة الحفل</div>
+    </div>
+  </div>
+
 </div><!-- end slideshow -->
 
 <!-- Navigation -->
 <div class="nav">
   <button id="prevBtn" onclick="changeSlide(-1)">&#8592;</button>
-    <span class="slide-counter" id="counter">1 / 45</span>
+    <span class="slide-counter" id="counter">1 / 48</span>
   <button id="nextBtn" onclick="changeSlide(1)">&#8594;</button>
   <div style="width: 1px; height: 20px; background: rgba(255,255,255,0.3); margin: 0 4px;"></div>
   <!-- Download PDF Button -->
@@ -1011,6 +1349,127 @@
   document.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
     if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changeSlide(-1);
+  });
+
+  /* ── PARALLAX EFFECT FOR MULTI-IMAGE SLIDES ── */
+  function initParallax() {
+    const splitSlides = document.querySelectorAll('.slide-split');
+    splitSlides.forEach(slide => {
+      slide.addEventListener('mousemove', (e) => {
+        if (!slide.classList.contains('active')) return;
+        const rect = slide.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        
+        const rotX = (y - 0.5) * 10;
+        const rotY = (x - 0.5) * 10;
+        
+        const imgSide = slide.querySelector('.img-side');
+        if (imgSide) {
+          imgSide.style.transform = `perspective(1200px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.02)`;
+        }
+      });
+
+      slide.addEventListener('mouseleave', () => {
+        const imgSide = slide.querySelector('.img-side');
+        if (imgSide) {
+          imgSide.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale(1)';
+        }
+      });
+    });
+  }
+
+  /* ── FLOATING PARTICLES BACKGROUND ── */
+  function initFloatingParticles() {
+    const slideshow = document.querySelector('.slideshow');
+    const particleCount = 20;
+    
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      
+      const dot = document.createElement('div');
+      dot.className = 'particle-dot';
+      
+      const startX = Math.random() * 100;
+      const startY = Math.random() * 100;
+      const duration = 8 + Math.random() * 4;
+      const delay = Math.random() * 3;
+      
+      particle.style.left = startX + '%';
+      particle.style.top = startY + '%';
+      dot.style.setProperty('--duration', duration + 's');
+      dot.style.setProperty('--delay', delay + 's');
+      
+      particle.appendChild(dot);
+      slideshow.appendChild(particle);
+    }
+  }
+
+  /* ── 3D FLIP TEXT ANIMATION ── */
+  function initTitleAnimations() {
+    const titles = document.querySelectorAll('.slide-title');
+    titles.forEach(title => {
+      if (title.closest('.slide').classList.contains('active')) {
+        const text = title.textContent;
+        title.innerHTML = '';
+        
+        for (let i = 0; i < text.length; i++) {
+          const span = document.createElement('span');
+          span.textContent = text[i];
+          span.style.display = 'inline-block';
+          span.style.animation = `flip3d 0.6s ease-out`;
+          span.style.animationDelay = (i * 0.05) + 's';
+          title.appendChild(span);
+        }
+      }
+    });
+  }
+
+  /* ── AURORA ANIMATION FOR SECTION DIVIDERS ── */
+  function initAuroraAnimation() {
+    const fullSlides = document.querySelectorAll('.slide-full');
+    fullSlides.forEach((slide, index) => {
+      if (index % 5 === 0) {
+        slide.style.background = 'linear-gradient(45deg, rgba(0,0,0,0.8), rgba(26,46,42,0.6), rgba(196,145,58,0.3))';
+        slide.style.backgroundSize = '200% 200%';
+        slide.style.animation = 'auroraGlow 20s ease infinite';
+      }
+    });
+  }
+
+  /* ── SHINE SWEEP EFFECT FOR BUTTONS ── */
+  function initShineEffects() {
+    const buttons = document.querySelectorAll('.nav button');
+    buttons.forEach(button => {
+      const shine = document.createElement('span');
+      shine.style.position = 'absolute';
+      shine.style.top = '0';
+      shine.style.left = '-100%';
+      shine.style.width = '100%';
+      shine.style.height = '100%';
+      shine.style.background = 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)';
+      shine.style.animation = 'shineSweep 0.6s ease-in-out';
+      shine.style.pointerEvents = 'none';
+      button.style.position = 'relative';
+      button.style.overflow = 'hidden';
+      button.addEventListener('mouseenter', () => {
+        const newShine = shine.cloneNode();
+        button.appendChild(newShine);
+        setTimeout(() => newShine.remove(), 600);
+      });
+    });
+  }
+
+  /* ── INITIALIZE ALL EFFECTS ON PAGE LOAD ── */
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      initParallax();
+      initFloatingParticles();
+      initAuroraAnimation();
+      initShineEffects();
+      console.log('[v0] All motion effects initialized');
+    }, 100);
   });
 </script>
 </body>
