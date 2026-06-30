@@ -1264,6 +1264,7 @@ For Interview Purposes Only</div>
 
 <div class="kbd-hint">← → Arrow keys to navigate</div>
 
+
 <script>
   // ── DISABLE RIGHT-CLICK CONTEXT MENU ──
   document.addEventListener('contextmenu', (e) => {
@@ -1273,56 +1274,49 @@ For Interview Purposes Only</div>
 
   // ── IMAGE PRELOADING FOR FAST LOADING ──
   function preloadImage(url) {
+    if (!url) return;
     const img = new Image();
     img.crossOrigin = 'anonymous';
     img.src = url;
   }
 
-  // Extract all image URLs and preload them
-  const slides = document.querySelectorAll('.slide');
-  const imageUrls = [];
-  slides.forEach((slide) => {
-    const style = slide.getAttribute('style');
-    if (style && style.includes('background-image')) {
-      const match = style.match(/url\('([^']+)'\)/);
-      if (match) imageUrls.push(match[1]);
-    }
-  });
-
-  // Preload first 3 slides immediately, then others on idle
-  if (imageUrls.length > 0) {
-    imageUrls.slice(0, 3).forEach(preloadImage);
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(() => {
-        imageUrls.slice(3).forEach(preloadImage);
-      }, { timeout: 2000 });
-    }
-  }
-
   // ── SLIDESHOW LOGIC ──
+  const slides = document.querySelectorAll('.slide');
   const counter = document.getElementById('counter');
   const dotsContainer = document.getElementById('dots');
   let current = 0;
   const total = slides.length;
-  document.getElementById('counter').textContent = `1 / ${total}`;
+
+  // Initialize counter
+  if (counter) counter.textContent = `1 / ${total}`;
 
   // Build dots
-  slides.forEach((_, i) => {
-    const dot = document.createElement('div');
-    dot.className = 'dot' + (i === 0 ? ' active' : '');
-    dot.onclick = () => goTo(i);
-    dotsContainer.appendChild(dot);
-  });
+  if (dotsContainer) {
+    dotsContainer.innerHTML = '';
+    slides.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.onclick = () => goTo(i);
+      dotsContainer.appendChild(dot);
+    });
+  }
 
-  
-  
   function goTo(n) {
+    if (n === current) return;
+    
     slides[current].classList.remove('active');
-    dotsContainer.children[current].classList.remove('active');
+    if (dotsContainer && dotsContainer.children[current]) {
+      dotsContainer.children[current].classList.remove('active');
+    }
+    
     current = (n + total) % total;
+    
     slides[current].classList.add('active');
-    dotsContainer.children[current].classList.add('active');
-    counter.textContent = (current + 1) + ' / ' + total;
+    if (dotsContainer && dotsContainer.children[current]) {
+      dotsContainer.children[current].classList.add('active');
+    }
+    
+    if (counter) counter.textContent = (current + 1) + ' / ' + total;
     
     // Preload next 3 slides
     for (let i = 1; i <= 3; i++) {
@@ -1344,6 +1338,10 @@ For Interview Purposes Only</div>
     }
   }
 
+  function changeSlide(dir) { 
+    goTo(current + dir); 
+  }
+
   // Background image error handling
   function checkBackgroundImages() {
     slides.forEach(slide => {
@@ -1359,49 +1357,20 @@ For Interview Purposes Only</div>
       }
     });
   }
-  window.addEventListener('load', checkBackgroundImages);
 
-      
-      // Preload <img> tags
-      const imgs = nextSlide.querySelectorAll('img');
-      imgs.forEach(img => {
-        if (img.src) preloadImage(img.src);
-      });
-    }
-  }
-
-  // Background image error handling
-  function checkBackgroundImages() {
-    slides.forEach(slide => {
-      const style = slide.getAttribute('style');
-      if (style && style.includes('background-image')) {
-        const match = style.match(/url\('([^']+)'\)/);
-        if (match) {
-          const url = match[1];
-          const img = new Image();
-          img.onerror = () => slide.classList.add('image-error');
-          img.src = url;
-        }
-      }
-    });
-  }
-  window.addEventListener('load', checkBackgroundImages);
-
-  }
-
-  function changeSlide(dir) { goTo(current + dir); }
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changeSlide(-1);
+  });
 
   // Show loading bar on page load and hide after images are loaded
   window.addEventListener('load', () => {
     setTimeout(() => {
       const loadingBar = document.getElementById('loadingBar');
       if (loadingBar) loadingBar.classList.add('hidden');
+      checkBackgroundImages();
     }, 800);
-  });
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
-    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changeSlide(-1);
   });
 
   /* ── PARALLAX EFFECT FOR MULTI-IMAGE SLIDES ── */
@@ -1435,6 +1404,7 @@ For Interview Purposes Only</div>
   /* ── FLOATING PARTICLES BACKGROUND ── */
   function initFloatingParticles() {
     const slideshow = document.querySelector('.slideshow');
+    if (!slideshow) return;
     const particleCount = 20;
     
     for (let i = 0; i < particleCount; i++) {
@@ -1521,9 +1491,10 @@ For Interview Purposes Only</div>
       initFloatingParticles();
       initAuroraAnimation();
       initShineEffects();
-      console.log('[v0] All motion effects initialized');
+      console.log('[v1] All motion effects initialized');
     }, 100);
   });
 </script>
+
 </body>
 </html>
